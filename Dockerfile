@@ -8,7 +8,11 @@ RUN apt-get update \
   && pip3 install --upgrade pip
 
 RUN \
-  apt-get install -yqq apt-transport-https
+  apt-get update \
+  && apt-get install -y --no-install-recommends apt-utils \
+  && apt-get install -y wget \
+  && rm -rf /var/lib/apt/lists/*
+  && apt-get install -yqq apt-transport-https
   
 RUN \
   echo "deb https://deb.nodesource.com/node_10.x stretch main" > /etc/apt/sources.list.d/nodesource.list && \
