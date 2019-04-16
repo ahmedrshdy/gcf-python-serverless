@@ -1,8 +1,15 @@
-FROM rcarmo/ubuntu-python
+FROM ubuntu:18.04
 MAINTAINER Ahmed Elshalaby <ahmedrshdy@hotmail.com>
+
+RUN apt-get update \
+  && apt-get install -y python3-pip python3-dev \
+  && cd /usr/local/bin \
+  && ln -s /usr/bin/python3 python \
+  && pip3 install --upgrade pip
+
 RUN \
-  apt-get update && \
   apt-get install -yqq apt-transport-https
+  
 RUN \
   echo "deb https://deb.nodesource.com/node_10.x stretch main" > /etc/apt/sources.list.d/nodesource.list && \
   wget -qO- https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
